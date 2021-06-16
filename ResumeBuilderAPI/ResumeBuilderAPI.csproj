@@ -13,10 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Services\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\ResumeBuilder.Data\ResumeBuilder.Data.csproj" />
     <ProjectReference Include="..\ResumeBuilder.DTO\ResumeBuilder.DTO.csproj" />
   </ItemGroup>
