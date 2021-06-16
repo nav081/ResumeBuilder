@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31205.134
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ResumeBuilderAPI", "ResumeBuilderAPI\ResumeBuilderAPI.csproj", "{844B96A4-B388-441A-83F1-EC5FC44FD499}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{844B96A4-B388-441A-83F1-EC5FC44FD499}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{844B96A4-B388-441A-83F1-EC5FC44FD499}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{844B96A4-B388-441A-83F1-EC5FC44FD499}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{844B96A4-B388-441A-83F1-EC5FC44FD499}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CAAE6657-60E8-4CC6-995B-E8667222D341}
+	EndGlobalSection
+EndGlobal
