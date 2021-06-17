@@ -28,7 +28,17 @@ namespace ResumeBuilder.Data.Services
 
         public async Task<User> Get(int id)
         {
-            var data =await _context.Users.FindAsync(id);
+            var data = await _context.Users.FindAsync(id);
+            if (data is null)
+                return default(User);
+            return data;
+        }
+
+        public async Task<User> Get(string username)
+        {
+            var data =await  _context.Users.Where(a => a.UserName == username).FirstOrDefaultAsync();
+            if (data is null)
+                data =await  _context.Users.FirstOrDefaultAsync(a => a.Email.ToLower() == username.ToLower());
             if (data is null)
                 return default(User);
             return data;

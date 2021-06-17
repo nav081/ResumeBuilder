@@ -4,4 +4,9 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ResumeBuilder.Data\ResumeBuilder.Data.csproj" />
+    <ProjectReference Include="..\ResumeBuilder.Utilities\ResumeBuilder.Utilities.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ResumeBuilderAPI.Factories;
+using ResumeBuilderAPI.Filters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,7 @@ namespace ResumeBuilderAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [ServiceFilter(typeof(AuthenticationFilter))]
     public class UserController : ControllerBase
     {
         #region Fileds
@@ -31,8 +33,6 @@ namespace ResumeBuilderAPI.Controllers
             return Ok(await _userservice.Get(id));
         }
         #endregion
-
-       
 
     }
 }
