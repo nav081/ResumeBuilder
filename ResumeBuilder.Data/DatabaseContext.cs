@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using ResumeBuilder.Data.Models.Common;
 using ResumeBuilder.Data.Models.User;
 
 namespace ResumeBuilder.Data
@@ -10,5 +11,7 @@ namespace ResumeBuilder.Data
 
         }
         public DbSet<User> Users { get; set; }
+        public DbSet<Token> Tokens { get; set; }
+
     }
 }

@@ -1,13 +1,17 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using ResumeBuilder.Data;
 using ResumeBuilder.Data.Services;
+using ResumeBuilder.Data.Services.Manager;
 using ResumeBuilderAPI.Factories;
+using ResumeBuilderAPI.Filters;
 
 namespace ResumeBuilderAPI
 {
@@ -27,20 +31,27 @@ namespace ResumeBuilderAPI
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddControllers();
 
+            services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
             #region Dependancy
 
             //Services
             services.AddScoped<IUserService, UserService>();
-
+            services.AddScoped<ICommonService, CommonService>();
 
             //Factories
             services.AddScoped<IUserFactory, UserFactory>();
+            services.AddScoped<IAccountFactory, AccountFactory>();
+            #endregion
 
+            #region Filters
+            services.AddScoped<AuthenticationFilter>();
             #endregion
 
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ResumeBuilderAPI", Version = "v1" });
+                c.OperationFilter<CustomHeaderSwaggerAttribute>();
             });
         }
 
