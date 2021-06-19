@@ -1,4 +1,6 @@
-﻿using ResumeBuilder.Data.Models.User;
+﻿using Microsoft.Extensions.Configuration;
+using ResumeBuilder.Data.Models.Common;
+using ResumeBuilder.Data.Models.User;
 using ResumeBuilder.Data.Services;
 using ResumeBuilder.Data.Services.Manager;
 using ResumeBuilder.Data.Services.TokenService;
@@ -16,14 +18,18 @@ namespace ResumeBuilderAPI.Factories
         private readonly IUserService _userService;
         private readonly ICommonService _commonService;
         private readonly ITokenService _tokenService;
+        private readonly IRepositoryService<Token> _tokenRepository;
+        public IConfiguration Configuration { get; }
         #endregion
 
         #region Constructor
-        public AccountFactory(IUserService userService, ICommonService commonService, ITokenService tokenService)
+        public AccountFactory(IUserService userService, ICommonService commonService, ITokenService tokenService, IRepositoryService<Token> tokenRepository, IConfiguration configuration)
         {
             _userService = userService;
+            _tokenRepository = tokenRepository;
             _commonService = commonService;
             _tokenService = tokenService;
+            Configuration = configuration;
         }
         #endregion
 
@@ -61,6 +67,13 @@ namespace ResumeBuilderAPI.Factories
         public void Logout(string token)
         {
             _tokenService.Delete(token);
+        }
+
+        public void RemoveInactive()
+        {
+            var duration = Configuration.GetValue<int>("UserManagement:LogoutInactiveUsers");
+            var allinactivetoken = _tokenService.AllInActive(DateTime.Now.AddDays(-duration));
+            _tokenRepository.DeleteMultiple(allinactivetoken);
         }
 
         #endregion

@@ -1,3 +1,4 @@
+using Hangfire;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -55,6 +56,10 @@ namespace ResumeBuilderAPI
             services.AddScoped<AuthenticationFilter>();
             #endregion
 
+
+            services.AddHangfire(x => x.UseSqlServerStorage(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddHangfireServer();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ResumeBuilderAPI", Version = "v1" });
@@ -63,7 +68,7 @@ namespace ResumeBuilderAPI
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env,IAccountFactory _account)
         {
             if (env.IsDevelopment())
             {
@@ -71,6 +76,10 @@ namespace ResumeBuilderAPI
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ResumeBuilderAPI v1"));
             }
+            app.UseHangfireDashboard("/hangfire", new DashboardOptions
+            {
+                Authorization = new[] { new MyAuthorizationFilter() }
+            });
 
             app.UseHttpsRedirection();
 
@@ -82,6 +91,9 @@ namespace ResumeBuilderAPI
             {
                 endpoints.MapControllers();
             });
+
+            RecurringJob.RemoveIfExists("SendInactiveAlert");
+            RecurringJob.AddOrUpdate("SendInactiveAlert", () => new Controllers.RecurringJobController(_account).RemoveInactiveToken(), Cron.Daily);
         }
     }
 }

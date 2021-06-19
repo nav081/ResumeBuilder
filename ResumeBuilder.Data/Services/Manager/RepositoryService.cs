@@ -19,10 +19,7 @@ namespace ResumeBuilder.Data.Services.Manager
             entities = context.Set<T>();
         }
 
-        public void Delete<Entity>(int id)
-        {
-            throw new System.NotImplementedException();
-        }
+        
 
         #endregion
 
@@ -48,6 +45,19 @@ namespace ResumeBuilder.Data.Services.Manager
         public void Update(T model)
         {
             entities.Update(model);
+            _context.SaveChanges();
+        }
+
+        public void Delete<Entity>(int id)
+        {
+            var data=entities.Find(id);
+            entities.Remove(data);
+            _context.SaveChanges();
+        }
+
+        public void DeleteMultiple(List<T> model)
+        {
+            entities.RemoveRange(model);
             _context.SaveChanges();
         }
 

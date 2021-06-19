@@ -1,5 +1,6 @@
 ﻿using ResumeBuilder.Data.Models.Common;
 using ResumeBuilder.Utilities;
+using System;
 
 namespace ResumeBuilder.Data.Models.User
 {
@@ -28,6 +29,7 @@ namespace ResumeBuilder.Data.Models.User
         public string IpAdress { get; set; }
         public AccountStatus Status { get; set; }
         public bool NewsletterSubcription { get; set; }
+        public DateTime? LastLogin { get; set; }
 
     }
 }

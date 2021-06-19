@@ -14,5 +14,7 @@ namespace ResumeBuilder.Data.Services.Manager
         void Insert(T model);
 
         void Delete<Entity>(int id);
+
+        void DeleteMultiple(List<T> model);
     }
 }

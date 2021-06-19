@@ -11,5 +11,7 @@ namespace ResumeBuilderAPI.Factories
         Task<LoginResponseModel> Login(string username, string Password,string ipaddress);
         Task<User> GetByToken(string token,string ipaddress);
         void Logout(string token);
+
+        void RemoveInactive();
     }
 }

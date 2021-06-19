@@ -33,12 +33,15 @@ namespace ResumeBuilder.Data.Services.Manager
         {
             try
             {
-                var tokeninfo = await _context.Tokens.FirstOrDefaultAsync(a => a.token == DecryptToken(token) && a.IPAdress == ipaddress);
+                var tokeninfo = await _context.Tokens.FirstOrDefaultAsync(a => a.token == DecryptToken(token) && a.IPAdress == ipaddress);                
                 if (tokeninfo is null)
                     return default(User);
                 var user = await _context.Users.FirstOrDefaultAsync(a => a.Id == tokeninfo.userid);
                 if (user is null)
                     return default(User);
+                user.LastLogin = DateTime.Now;
+                _context.Users.Update(user);
+                await _context.SaveChangesAsync();
                 return user;
             }
             catch (Exception)
