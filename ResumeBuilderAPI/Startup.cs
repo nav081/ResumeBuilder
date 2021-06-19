@@ -10,6 +10,7 @@ using Microsoft.OpenApi.Models;
 using ResumeBuilder.Data;
 using ResumeBuilder.Data.Services;
 using ResumeBuilder.Data.Services.Manager;
+using ResumeBuilder.Data.Services.TokenService;
 using ResumeBuilderAPI.Factories;
 using ResumeBuilderAPI.Filters;
 
@@ -35,13 +36,19 @@ namespace ResumeBuilderAPI
 
             #region Dependancy
 
+            
+
+
             //Services
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ICommonService, CommonService>();
+            services.AddScoped<ITokenService, TokenService>();
+            services.AddScoped(typeof(IRepositoryService<>), typeof(RepositoryService<>));
 
             //Factories
             services.AddScoped<IUserFactory, UserFactory>();
             services.AddScoped<IAccountFactory, AccountFactory>();
+            services.AddScoped<IResumeBuilderFactory, ResumeBuilderFactory>();
             #endregion
 
             #region Filters

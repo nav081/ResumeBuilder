@@ -31,7 +31,28 @@ namespace ResumeBuilder.Data.Services.Manager
 
         public async Task<User> GetUserByToken(string token,string ipaddress)
         {
-            var tokeninfo = await _context.Tokens.FirstOrDefaultAsync(a => a.token == EncryptionHelper.Decrypt(token) && a.IPAdress== ipaddress);
+            try
+            {
+                var tokeninfo = await _context.Tokens.FirstOrDefaultAsync(a => a.token == DecryptToken(token) && a.IPAdress == ipaddress);
+                if (tokeninfo is null)
+                    return default(User);
+                var user = await _context.Users.FirstOrDefaultAsync(a => a.Id == tokeninfo.userid);
+                if (user is null)
+                    return default(User);
+                return user;
+            }
+            catch (Exception)
+            {
+
+                return default(User);
+            }
+            
+
+        }
+
+        public async Task<User> GetUserByToken(string token)
+        {
+            var tokeninfo = await _context.Tokens.FirstOrDefaultAsync(a => a.token == DecryptToken(token));
             if (tokeninfo is null)
                 return default(User);
             var user = await _context.Users.FirstOrDefaultAsync(a => a.Id == tokeninfo.userid);
@@ -39,6 +60,17 @@ namespace ResumeBuilder.Data.Services.Manager
                 return default(User);
             return user;
 
+        }
+
+        private string DecryptToken(string token) {
+            try
+            {
+                return EncryptionHelper.Decrypt(token);
+            }
+            catch (Exception)
+            {
+                return token;
+            }
         }
     }
 }

@@ -39,10 +39,26 @@ namespace ResumeBuilderAPI.Controllers
         }
 
         [Route("NotAuthorized")]
-        [HttpPost]
+        [HttpGet]
         public IActionResult NotAuthorized()
         {
             return Unauthorized();
+        }
+
+        [Route("Logout")]
+        [HttpGet]
+        public IActionResult Logout(string token)
+        {
+            try
+            {
+                _accountManager.Logout(token);
+                return Ok();
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
+            
         }
         #endregion
 

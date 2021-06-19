@@ -30,4 +30,12 @@ namespace ResumeBuilder.Utilities
         [Display(Name = "Incorrect UserName/Email")]
         IncorrectUserName = 3,
     }
+
+    public enum TemplateType
+    {
+        [Display(Name = "Single Page")]
+        SinglePage = 1,
+        [Display(Name = "Multi Page")]
+        MultiPage = 2
+    }
 }

@@ -1,9 +1,11 @@
 ﻿using ResumeBuilder.Data.Models.User;
 using ResumeBuilder.Data.Services;
 using ResumeBuilder.Data.Services.Manager;
+using ResumeBuilder.Data.Services.TokenService;
 using ResumeBuilder.DTO.Account;
 using ResumeBuilder.Utilities;
 using System;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace ResumeBuilderAPI.Factories
@@ -13,13 +15,15 @@ namespace ResumeBuilderAPI.Factories
         #region Fields
         private readonly IUserService _userService;
         private readonly ICommonService _commonService;
+        private readonly ITokenService _tokenService;
         #endregion
 
         #region Constructor
-        public AccountFactory(IUserService userService, ICommonService commonService)
+        public AccountFactory(IUserService userService, ICommonService commonService, ITokenService tokenService)
         {
             _userService = userService;
             _commonService = commonService;
+            _tokenService = tokenService;
         }
         #endregion
 
@@ -52,6 +56,11 @@ namespace ResumeBuilderAPI.Factories
         public async Task<User> GetByToken(string token, string ipaddress)
         {
             return await _commonService.GetUserByToken(token,ipaddress);
+        }
+
+        public void Logout(string token)
+        {
+            _tokenService.Delete(token);
         }
 
         #endregion
