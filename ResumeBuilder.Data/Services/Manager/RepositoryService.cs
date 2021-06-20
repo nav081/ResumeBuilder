@@ -25,7 +25,6 @@ namespace ResumeBuilder.Data.Services.Manager
 
         #region Methods
 
-
         public T Get<Entity>(int id)
         {
             return entities.Find(id);
@@ -59,6 +58,11 @@ namespace ResumeBuilder.Data.Services.Manager
         {
             entities.RemoveRange(model);
             _context.SaveChanges();
+        }
+
+        public List<T> GetAll(int[] ids)
+        {
+            return  entities.Where(a=>ids.Contains(a.Id)).ToList();
         }
 
         #endregion

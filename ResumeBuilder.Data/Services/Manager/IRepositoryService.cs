@@ -7,6 +7,8 @@ namespace ResumeBuilder.Data.Services.Manager
     {
         List<T> GetAll();
 
+        List<T> GetAll(int[] ids);
+
         T Get<Entity>(int id);
 
         void Update(T model);
