@@ -64,16 +64,16 @@ namespace ResumeBuilderAPI.Factories
             return await _commonService.GetUserByToken(token,ipaddress);
         }
 
-        public void Logout(string token)
+        public async Task Logout(string token)
         {
-            _tokenService.Delete(token);
+            await _tokenService.DeleteAsync(token);
         }
 
-        public void RemoveInactive()
+        public async Task RemoveInactive()
         {
             var duration = Configuration.GetValue<int>("UserManagement:LogoutInactiveUsers");
-            var allinactivetoken = _tokenService.AllInActive(DateTime.Now.AddDays(-duration));
-            _tokenRepository.DeleteMultiple(allinactivetoken);
+            var allinactivetoken =await _commonService.AllInActive(DateTime.Now.AddDays(-duration));
+            await _tokenRepository.DeleteMultipleAsync(allinactivetoken);
         }
 
         #endregion

@@ -1,13 +1,10 @@
-﻿using ResumeBuilder.Data.Models.Common;
-using System;
-using System.Collections.Generic;
+﻿using System.Threading.Tasks;
 
 namespace ResumeBuilder.Data.Services.TokenService
 {
     public interface ITokenService
     {
-        void Delete(string token);
+        Task DeleteAsync(string token);
 
-        List<Token> AllInActive(DateTime time);
     }
 }

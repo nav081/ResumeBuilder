@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ResumeBuilder.Data.Models.User;
+using ResumeBuilder.Data.Services.Manager;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace ResumeBuilder.Data.Services
@@ -9,26 +9,26 @@ namespace ResumeBuilder.Data.Services
     public class UserService : IUserService
     {
         #region Fields
-        private readonly DatabaseContext _context;
+        private IRepositoryService<User> _userRepository;
         #endregion
 
 
         #region Contructor
-        public UserService(DatabaseContext context)
+        public UserService(IRepositoryService<User> userRepository)
         {
-            _context = context;
+            _userRepository = userRepository;
         }
         #endregion
 
         #region Methods
         public async Task<List<User>> GetAll()
         {
-            return await _context.Users.ToListAsync();
+            return await _userRepository.Table.ToListAsync();
         }
 
         public async Task<User> Get(int id)
         {
-            var data = await _context.Users.FindAsync(id);
+            var data = await _userRepository.Table.FirstOrDefaultAsync(a=>a.Id==id);
             if (data is null)
                 return default(User);
             return data;
@@ -36,9 +36,9 @@ namespace ResumeBuilder.Data.Services
 
         public async Task<User> Get(string username)
         {
-            var data = await _context.Users.FirstOrDefaultAsync(a => a.UserName == username);
+            var data = await _userRepository.Table.FirstOrDefaultAsync(a => a.UserName == username);
             if (data is null)
-                data =await  _context.Users.FirstOrDefaultAsync(a => a.Email.ToLower() == username.ToLower());
+                data =await _userRepository.Table.FirstOrDefaultAsync(a => a.Email.ToLower() == username.ToLower());
             if (data is null)
                 return default(User);
             return data;

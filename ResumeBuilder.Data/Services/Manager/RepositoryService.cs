@@ -2,6 +2,7 @@
 using ResumeBuilder.Data.Models.Common;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace ResumeBuilder.Data.Services.Manager
 {
@@ -25,46 +26,47 @@ namespace ResumeBuilder.Data.Services.Manager
 
         #region Methods
 
-        public T Get<Entity>(int id)
+        public async Task<T>  GetAsync<Entity>(int id)
         {
-            return entities.Find(id);
+            return await entities.FindAsync(id);
         }
 
-        public List<T> GetAll()
+        public async Task<List<T>> GetAllAsync()
         {
-            return entities.ToList();
+            return await entities.ToListAsync();
         }
 
-        public void Insert(T model)
+        public async Task  InsertAsync(T model)
         {
             entities.Add(model);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public void Update(T model)
+        public async Task UpdateAsync(T model)
         {
             entities.Update(model);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public void Delete<Entity>(int id)
+        public async Task DeleteAsync(int id)
         {
             var data=entities.Find(id);
             entities.Remove(data);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public void DeleteMultiple(List<T> model)
+        public async Task DeleteMultipleAsync(List<T> model)
         {
             entities.RemoveRange(model);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public List<T> GetAll(int[] ids)
+        public async Task<List<T>> GetAllAsync(int[] ids)
         {
-            return  entities.Where(a=>ids.Contains(a.Id)).ToList();
+            return await entities.Where(a=>ids.Contains(a.Id)).ToListAsync();
         }
 
+        public IQueryable<T> Table => entities;
         #endregion
     }
 }

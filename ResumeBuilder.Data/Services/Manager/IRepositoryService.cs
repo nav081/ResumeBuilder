@@ -1,22 +1,27 @@
 ﻿using ResumeBuilder.Data.Models.Common;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace ResumeBuilder.Data.Services.Manager
 {
     public interface IRepositoryService<T> where T : BaseEntitites
     {
-        List<T> GetAll();
+        Task<List<T>> GetAllAsync();
 
-        List<T> GetAll(int[] ids);
+        Task<List<T>> GetAllAsync(int[] ids);
 
-        T Get<Entity>(int id);
+        Task<T> GetAsync<Entity>(int id);
 
-        void Update(T model);
+        Task UpdateAsync(T model);
 
-        void Insert(T model);
+        Task InsertAsync(T model);
 
-        void Delete<Entity>(int id);
+        Task DeleteAsync(int id);
 
-        void DeleteMultiple(List<T> model);
+        Task DeleteMultipleAsync(List<T> model);
+
+        IQueryable<T> Table { get; }
+
     }
 }

@@ -43,7 +43,7 @@ namespace ResumeBuilderAPI.Factories
             if (user is null)
                 return "Invalid Token";
 
-            _template_bodyrepository.Insert(new Body
+            await _template_bodyrepository.InsertAsync(new Body
             {
                 Type = model.Type,
                 HTML = model.HTML,
@@ -60,7 +60,7 @@ namespace ResumeBuilderAPI.Factories
             if (user is null)
                 return "Invalid Token";
 
-            _template_footerrepository.Insert(new Footer
+            await _template_footerrepository.InsertAsync(new Footer
             {
                 Type = model.Type,
                 HTML = model.HTML,
@@ -77,7 +77,7 @@ namespace ResumeBuilderAPI.Factories
             if (user is null)
                 return "Invalid Token";
 
-            _template_headerrepository.Insert(new Header
+            await _template_headerrepository.InsertAsync(new Header
             {
                 Type = model.Type,
                 HTML = model.HTML,
@@ -95,7 +95,7 @@ namespace ResumeBuilderAPI.Factories
             if (user is null)
                 return "Invalid Token";
 
-            _template_salutaionrepository.Insert(new Salutation
+            await _template_salutaionrepository.InsertAsync(new Salutation
             {
                 Type = model.Type,
                 HTML = model.HTML,
@@ -112,7 +112,7 @@ namespace ResumeBuilderAPI.Factories
             if (user is null)
                 return "Invalid Token";
 
-            _templaterepository.Insert(new Template
+            await _templaterepository.InsertAsync(new Template
             {
                 Type = model.Type,
                 HeaderId=model.HeaderId,

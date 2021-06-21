@@ -1,4 +1,7 @@
-﻿using ResumeBuilder.Data.Models.User;
+﻿using ResumeBuilder.Data.Models.Common;
+using ResumeBuilder.Data.Models.User;
+using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace ResumeBuilder.Data.Services.Manager
@@ -9,6 +12,7 @@ namespace ResumeBuilder.Data.Services.Manager
 
         Task<User> GetUserByToken(string token);
         Task<string> GenerateToken(int userid, string ipaddress);
+        Task<List<Token>> AllInActive(DateTime time);
 
     }
 }

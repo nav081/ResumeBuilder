@@ -24,7 +24,7 @@ namespace ResumeBuilderAPI.Controllers
 
         #region Methods
         [Route("Login")]
-        [HttpGet]
+        [HttpPost]
         public async Task<IActionResult> Login(string username,string password)
         {
             var ipaddress=_contextAccessor.HttpContext.Connection.RemoteIpAddress.MapToIPv4().ToString();
@@ -46,12 +46,12 @@ namespace ResumeBuilderAPI.Controllers
         }
 
         [Route("Logout")]
-        [HttpGet]
-        public IActionResult Logout(string token)
+        [HttpPost]
+        public async Task<IActionResult> Logout(string token)
         {
             try
             {
-                _accountManager.Logout(token);
+                await _accountManager.Logout(token);
                 return Ok();
             }
             catch (System.Exception)

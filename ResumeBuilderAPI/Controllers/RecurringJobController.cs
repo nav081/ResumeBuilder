@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ResumeBuilderAPI.Factories;
+using System.Threading.Tasks;
 
 namespace ResumeBuilderAPI.Controllers
 {
@@ -16,9 +17,9 @@ namespace ResumeBuilderAPI.Controllers
 
         [Route("RemoveInactiveToken")]
         [HttpGet]
-        public void RemoveInactiveToken()
+        public async Task RemoveInactiveToken()
         {
-            _account.RemoveInactive();
+            await _account.RemoveInactive();
         }
     }
 }

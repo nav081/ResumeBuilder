@@ -1,35 +1,27 @@
-﻿using Microsoft.EntityFrameworkCore;
-using ResumeBuilder.Data.Models.Common;
+﻿using ResumeBuilder.Data.Models.Common;
 using ResumeBuilder.Data.Services.Manager;
 using ResumeBuilder.Utilities;
-using System;
-using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace ResumeBuilder.Data.Services.TokenService
 {
     public class TokenService : ITokenService
     {
-        private readonly DatabaseContext _context;
-        public TokenService(DatabaseContext context)
+        private IRepositoryService<Token> _tokenRepository;
+        public TokenService(IRepositoryService<Token> tokenRepository)
         {
-            _context = context;
+            _tokenRepository = tokenRepository;
         }
 
-        public List<Token> AllInActive(DateTime time)
-        {
-            var inactiveusers = _context.Users.Where(a => a.LastLogin < time).Select(a=>a.Id).ToList();
-            return _context.Tokens.Where(x => inactiveusers.Contains(x.userid)).ToList();
+       
 
-        }
-
-        public void Delete(string token)
+        public async Task DeleteAsync(string token)
         {
-            var data= _context.Tokens.FirstOrDefault(a=>a.token== EncryptionHelper.Decrypt(token));
+            var data= _tokenRepository.Table.FirstOrDefault(a=>a.token== EncryptionHelper.Decrypt(token));
             if (!(data is null))
             {
-                _context.Tokens.Remove(data);
-                _context.SaveChanges();
+                await _tokenRepository.DeleteAsync(data.Id);
             }
         }
     }

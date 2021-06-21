@@ -10,8 +10,7 @@ namespace ResumeBuilderAPI.Factories
         Task<UserStatusResponseModel> GetUserStatusBy(string Username, string Password);
         Task<LoginResponseModel> Login(string username, string Password,string ipaddress);
         Task<User> GetByToken(string token,string ipaddress);
-        void Logout(string token);
-
-        void RemoveInactive();
+        Task Logout(string token);
+        Task RemoveInactive();
     }
 }
