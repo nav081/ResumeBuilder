@@ -5,11 +5,13 @@ VisualStudioVersion = 16.0.31205.134
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ResumeBuilderAPI", "ResumeBuilderAPI\ResumeBuilderAPI.csproj", "{844B96A4-B388-441A-83F1-EC5FC44FD499}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ResumeBuilder.DTO", "ResumeBuilder.DTO\ResumeBuilder.DTO.csproj", "{18C494BA-EF0A-4D78-A77F-35C74C9AE2D9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ResumeBuilder.DTO", "ResumeBuilder.DTO\ResumeBuilder.DTO.csproj", "{18C494BA-EF0A-4D78-A77F-35C74C9AE2D9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ResumeBuilder.Data", "ResumeBuilder.Data\ResumeBuilder.Data.csproj", "{279819A5-9D61-48DA-A0AD-1083A41478C3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ResumeBuilder.Data", "ResumeBuilder.Data\ResumeBuilder.Data.csproj", "{279819A5-9D61-48DA-A0AD-1083A41478C3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ResumeBuilder.Utilities", "ResumeBuilder.Utilities\ResumeBuilder.Utilities.csproj", "{44E5BEB2-A10B-4200-ACC3-AFC629DD9D09}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ResumeBuilder.Utilities", "ResumeBuilder.Utilities\ResumeBuilder.Utilities.csproj", "{44E5BEB2-A10B-4200-ACC3-AFC629DD9D09}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ResumeBuilder.Caching", "ResumeBuilder.Caching\ResumeBuilder.Caching.csproj", "{CDD02469-A9D1-43D2-80A2-DD4EC7415321}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{44E5BEB2-A10B-4200-ACC3-AFC629DD9D09}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{44E5BEB2-A10B-4200-ACC3-AFC629DD9D09}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{44E5BEB2-A10B-4200-ACC3-AFC629DD9D09}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CDD02469-A9D1-43D2-80A2-DD4EC7415321}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDD02469-A9D1-43D2-80A2-DD4EC7415321}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDD02469-A9D1-43D2-80A2-DD4EC7415321}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDD02469-A9D1-43D2-80A2-DD4EC7415321}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

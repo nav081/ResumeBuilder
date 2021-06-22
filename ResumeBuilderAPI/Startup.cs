@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.StackExchangeRedis;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -14,6 +15,8 @@ using ResumeBuilder.Data.Services.Manager;
 using ResumeBuilder.Data.Services.TokenService;
 using ResumeBuilderAPI.Factories;
 using ResumeBuilderAPI.Filters;
+using StackExchange.Redis;
+using System.Security.Cryptography.X509Certificates;
 
 namespace ResumeBuilderAPI
 {
@@ -33,11 +36,26 @@ namespace ResumeBuilderAPI
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddControllers();
 
+            //Caching
+            
+            services.AddStackExchangeRedisCache(options =>
+            {
+                options.Configuration = Configuration.GetConnectionString("RedisConnection");
+                options.InstanceName = "ResumeBuilder";
+
+            });
+
+            //services.AddSingleton<IConnectionMultiplexer>(x =>
+
+            //    ConnectionMultiplexer.Connect(Configuration.GetConnectionString("RedisConnection"))
+            //);
+
+
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             #region Dependancy
 
-            
+
 
 
             //Services
@@ -77,7 +95,7 @@ namespace ResumeBuilderAPI
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env,IAccountFactory _account)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IAccountFactory _account)
         {
             if (env.IsDevelopment())
             {

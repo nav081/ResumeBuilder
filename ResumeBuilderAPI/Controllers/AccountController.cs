@@ -1,8 +1,11 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ResumeBuilder.Caching;
 using ResumeBuilder.DTO.Account;
 using ResumeBuilderAPI.Factories;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Caching.Distributed;
+using System;
 
 namespace ResumeBuilderAPI.Controllers
 {
@@ -29,7 +32,7 @@ namespace ResumeBuilderAPI.Controllers
         public async Task<IActionResult> Login(LoginRequestModel model)
         {
             var ipaddress=_contextAccessor.HttpContext.Connection.RemoteIpAddress.MapToIPv4().ToString();
-            return Ok(await _accountManager.Login(model.username,model.password,ipaddress));
+            return Ok(await _accountManager.Login(model.username, model.password, ipaddress));
         }
 
         [Route("GetInfo")]
