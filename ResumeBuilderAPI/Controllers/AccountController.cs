@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ResumeBuilder.DTO.Account;
 using ResumeBuilderAPI.Factories;
 using System.Threading.Tasks;
 
@@ -25,10 +26,10 @@ namespace ResumeBuilderAPI.Controllers
         #region Methods
         [Route("Login")]
         [HttpPost]
-        public async Task<IActionResult> Login(string username,string password)
+        public async Task<IActionResult> Login(LoginRequestModel model)
         {
             var ipaddress=_contextAccessor.HttpContext.Connection.RemoteIpAddress.MapToIPv4().ToString();
-            return Ok(await _accountManager.Login(username,password,ipaddress));
+            return Ok(await _accountManager.Login(model.username,model.password,ipaddress));
         }
 
         [Route("GetInfo")]
@@ -36,6 +37,18 @@ namespace ResumeBuilderAPI.Controllers
         public async Task<IActionResult> GetInfo(string token,string ipadress)
         {
             return Ok(await _accountManager.GetByToken(token,ipadress));
+        }
+
+        [Route("VerifyToken")]
+        [HttpPost]
+        public async Task<IActionResult> VerifyToken(TokenVerificationModel model)
+        {
+            var ipaddress = _contextAccessor.HttpContext.Connection.RemoteIpAddress.MapToIPv4().ToString();
+            var data = await _accountManager.GetByToken(model.token, ipaddress);
+            if (data == null)
+                return Ok(new responsemodel { response=false});
+            else
+                return Ok(new responsemodel { response = true });
         }
 
         [Route("NotAuthorized")]
