@@ -12,7 +12,6 @@ namespace ResumeBuilder.Data.Services
         private IRepositoryService<User> _userRepository;
         #endregion
 
-
         #region Contructor
         public UserService(IRepositoryService<User> userRepository)
         {
@@ -23,12 +22,12 @@ namespace ResumeBuilder.Data.Services
         #region Methods
         public async Task<List<User>> GetAll()
         {
-            return await _userRepository.Table.ToListAsync();
+            return await _userRepository.GetAllAsync();
         }
 
         public async Task<User> Get(int id)
         {
-            var data = await _userRepository.Table.FirstOrDefaultAsync(a=>a.Id==id);
+            var data = await _userRepository.GetAsync<User>(id);
             if (data is null)
                 return default(User);
             return data;
@@ -38,7 +37,7 @@ namespace ResumeBuilder.Data.Services
         {
             var data = await _userRepository.Table.FirstOrDefaultAsync(a => a.UserName == username);
             if (data is null)
-                data =await _userRepository.Table.FirstOrDefaultAsync(a => a.Email.ToLower() == username.ToLower());
+                data = await _userRepository.Table.FirstOrDefaultAsync(a => a.Email.ToLower() == username.ToLower());
             if (data is null)
                 return default(User);
             return data;

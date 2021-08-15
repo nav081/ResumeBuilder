@@ -12,27 +12,22 @@ namespace ResumeBuilder.Caching
             var options = new DistributedCacheEntryOptions();
             options.AbsoluteExpirationRelativeToNow = absoluteexpiretime ?? TimeSpan.FromSeconds(60);
             options.SlidingExpiration = unusedexpiretime;
-
-            var json = JsonSerializer.Serialize(data);
-            await cache.SetStringAsync(recordid, json, options);
+            await cache.SetStringAsync(recordid, JsonSerializer.Serialize(data), options);
         }
 
         public static async Task<T> GetRecordAsync<T>(this IDistributedCache cache, string recordid)
         {
             try
             {
-                var val = cache;
                 var json = await cache.GetStringAsync(recordid);
                 if (json is null)
                     return default(T);
-                else
-                    return JsonSerializer.Deserialize<T>(json);
+                return JsonSerializer.Deserialize<T>(json);
             }
             catch (Exception)
             {
                 return default(T);
             }
-            
         }
     }
 }

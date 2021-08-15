@@ -21,6 +21,8 @@ namespace ResumeBuilder.Data.Services.Manager
 
         Task DeleteMultipleAsync(List<T> model);
 
+        Task DeleteMultipleAsync(int[] ids);
+
         IQueryable<T> Table { get; }
 
     }

@@ -55,6 +55,12 @@ namespace ResumeBuilder.Data.Services.Manager
             await _context.SaveChangesAsync();
         }
 
+        public async Task DeleteMultipleAsync(int[] ids)
+        {
+            var record =await GetAllAsync(ids);
+            entities.RemoveRange(record);
+            await _context.SaveChangesAsync();
+        }
         public async Task DeleteMultipleAsync(List<T> model)
         {
             entities.RemoveRange(model);

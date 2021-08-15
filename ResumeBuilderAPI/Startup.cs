@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Caching.StackExchangeRedis;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -15,8 +14,6 @@ using ResumeBuilder.Data.Services.Manager;
 using ResumeBuilder.Data.Services.TokenService;
 using ResumeBuilderAPI.Factories;
 using ResumeBuilderAPI.Filters;
-using StackExchange.Redis;
-using System.Security.Cryptography.X509Certificates;
 
 namespace ResumeBuilderAPI
 {
@@ -44,19 +41,9 @@ namespace ResumeBuilderAPI
                 options.InstanceName = "ResumeBuilder";
 
             });
-
-            //services.AddSingleton<IConnectionMultiplexer>(x =>
-
-            //    ConnectionMultiplexer.Connect(Configuration.GetConnectionString("RedisConnection"))
-            //);
-
-
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             #region Dependancy
-
-
-
 
             //Services
             services.AddScoped<IUserService, UserService>();
