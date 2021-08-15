@@ -11,7 +11,7 @@ namespace ResumeBuilder.Data.Services.Manager
 
         Task<List<T>> GetAllAsync(int[] ids);
 
-        Task<T> GetAsync<Entity>(int id);
+        Task<T> GetAsync(int id);
 
         Task UpdateAsync(T model);
 

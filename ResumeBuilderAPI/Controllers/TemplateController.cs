@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ResumeBuilder.DTO.ResumeBuilder;
+using ResumeBuilder.DTO.Templates;
 using ResumeBuilderAPI.Factories;
+using ResumeBuilderAPI.Factories.Templates;
 using ResumeBuilderAPI.Filters;
 using System.Threading.Tasks;
 
@@ -9,20 +11,60 @@ namespace ResumeBuilderAPI.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [ServiceFilter(typeof(AuthenticationFilter))]
-    public class GenerateTemplateController : ControllerBase
+    public class TemplateController : ControllerBase
     {
         #region Fields
         private readonly IResumeBuilderFactory _cvBuilderService;
+        private readonly ITemplatesFactory _templatesFactory;
         #endregion
 
         #region Constructor
-        public GenerateTemplateController(IResumeBuilderFactory cvBuilderService)
+        public TemplateController(IResumeBuilderFactory cvBuilderService, ITemplatesFactory templatesFactory)
         {
             _cvBuilderService = cvBuilderService;
+            _templatesFactory = templatesFactory;
         }
         #endregion
 
         #region Methods
+        [Route("GetTemplates")]
+        [HttpGet]
+        public async Task<IActionResult> GetTemplate()
+        {
+            var request = new GetTemplateRequestModel();
+            return Ok(await _templatesFactory.GetAllTemplates(request));
+        }
+
+        [Route("GetBodies")]
+        [HttpGet]
+        public async Task<IActionResult> GetBodies()
+        {
+            var request = new GetTemplateRequestModel();
+            return Ok(await _templatesFactory.GetAllBodies(request));
+        }
+
+        [Route("GetHeaders")]
+        [HttpGet]
+        public async Task<IActionResult> GetHeaders()
+        {
+            var request = new GetTemplateRequestModel();
+            return Ok(await _templatesFactory.GetAllHeaders(request));
+        }
+
+        [Route("GetSalutaions")]
+        [HttpGet]
+        public async Task<IActionResult> GetSalutaions()
+        {
+            var request = new GetTemplateRequestModel();
+            return Ok(await _templatesFactory.GetAllSalutations(request));
+        }
+        [Route("GetFooters")]
+        [HttpGet]
+        public async Task<IActionResult> GetFooters()
+        {
+            var request = new GetTemplateRequestModel();
+            return Ok(await _templatesFactory.GetAllFooters(request));
+        }
 
         [Route("CreateTemplate")]
         [HttpPost]

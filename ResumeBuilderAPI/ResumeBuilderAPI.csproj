@@ -20,4 +20,10 @@
     <ProjectReference Include="..\ResumeBuilder.DTO\ResumeBuilder.DTO.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\Resource.en-US.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+
 </Project>

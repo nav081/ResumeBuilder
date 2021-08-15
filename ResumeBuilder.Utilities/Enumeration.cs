@@ -38,4 +38,14 @@ namespace ResumeBuilder.Utilities
         [Display(Name = "Multi Page")]
         MultiPage = 2
     }
+
+    public enum TemplateHeirarchy
+    {
+        [Display(Name = "Top")]
+        Top = 1,
+        [Display(Name = "Mid")]
+        Mid = 2,
+        [Display(Name = "Bottom")]
+        Bottom = 3
+    }
 }

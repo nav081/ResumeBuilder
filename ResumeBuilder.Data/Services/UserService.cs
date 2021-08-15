@@ -27,7 +27,7 @@ namespace ResumeBuilder.Data.Services
 
         public async Task<User> Get(int id)
         {
-            var data = await _userRepository.GetAsync<User>(id);
+            var data = await _userRepository.GetAsync(id);
             if (data is null)
                 return default(User);
             return data;

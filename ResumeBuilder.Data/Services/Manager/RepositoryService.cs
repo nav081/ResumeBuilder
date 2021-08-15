@@ -26,7 +26,7 @@ namespace ResumeBuilder.Data.Services.Manager
 
         #region Methods
 
-        public async Task<T>  GetAsync<Entity>(int id)
+        public async Task<T>  GetAsync(int id)
         {
             return await entities.FindAsync(id);
         }
