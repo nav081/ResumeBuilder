@@ -7,7 +7,6 @@ using ResumeBuilder.Data.Services.TokenService;
 using ResumeBuilder.DTO.Account;
 using ResumeBuilder.Utilities;
 using System;
-using System.Net;
 using System.Threading.Tasks;
 
 namespace ResumeBuilderAPI.Factories

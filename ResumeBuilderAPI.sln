@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ResumeBuilder.Data", "Resum
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ResumeBuilder.Utilities", "ResumeBuilder.Utilities\ResumeBuilder.Utilities.csproj", "{44E5BEB2-A10B-4200-ACC3-AFC629DD9D09}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ResumeBuilder.Caching", "ResumeBuilder.Caching\ResumeBuilder.Caching.csproj", "{CDD02469-A9D1-43D2-80A2-DD4EC7415321}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ResumeBuilder.Caching", "ResumeBuilder.Caching\ResumeBuilder.Caching.csproj", "{CDD02469-A9D1-43D2-80A2-DD4EC7415321}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ResumeBuilder.Test", "ResumeBuilder.Test\ResumeBuilder.Test.csproj", "{BD9BD10D-3E78-4405-9E3B-5C6EFDB49C07}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{CDD02469-A9D1-43D2-80A2-DD4EC7415321}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CDD02469-A9D1-43D2-80A2-DD4EC7415321}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CDD02469-A9D1-43D2-80A2-DD4EC7415321}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD9BD10D-3E78-4405-9E3B-5C6EFDB49C07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD9BD10D-3E78-4405-9E3B-5C6EFDB49C07}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD9BD10D-3E78-4405-9E3B-5C6EFDB49C07}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD9BD10D-3E78-4405-9E3B-5C6EFDB49C07}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
